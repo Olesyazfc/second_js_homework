@@ -33,26 +33,24 @@ const deleteProduct = function (id) {
 const clearingOfCart = function() {
     cart.splice(0, cart.length);
 }
-const totalAmount = function() {
-    let counter = 0
-    for ( i = 0; i < cart.length; i++) {
-        counter += cart[i]['amount']
-    }
-    return counter
-}
 
-const totalSumm = function() {
-    let sum = 0
+const totalCount = function () {
+    let totalAmount = 0
+    for ( i = 0; i < cart.length; i++) {
+        totalAmount += cart[i]['amount']
+    }
+    let totalSumm = 0
     for ( i = 0; i < cart.length; i++) {
         for ( p = 0; p < products.length; p++) {
             if ( cart[i]['good'] == products[p]['id'] ) {
                 calculation = products[p]['price'] * cart[i]['amount']
-                sum += calculation
+                totalSumm += calculation
             }
         }
     }
-    return sum
+    return { totalSumm: totalSumm, totalAmount: totalAmount }
 }
+
 
 // appendProduct(3, 1)
 // deleteProduct(2)
@@ -60,4 +58,4 @@ const totalSumm = function() {
 
 // console.log(cart)
 // console.log(totalAmount())
-console.log(totalSumm())
+console.log(totalCount())
